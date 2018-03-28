@@ -31,3 +31,44 @@ input {
 .example-selected-value {
     margin: 15px 0;
 }
+
+.header {
+  background-image: url("../../assets/header.png");
+  height: 30vh;
+  width: 100%;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 5%;
+}
+
+.icons {
+  width: 100%;
+  text-align: center;
+}
+
+.actions_left {
+  float: left;
+  width: 60%;
+  height: 30px;
+  display: inline;
+}
+
+.actions_right {
+  float: right;
+  height: 30px;
+  text-align: left;
+  padding-top: 6%;
+  display: inline;
+}
+
+.actions_right button {
+  width: 50%;
+}
+
+mat-grid-list {
+}
+
+mat-grid-tile {
+  padding: 5%;
+}

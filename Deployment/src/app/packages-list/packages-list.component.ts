@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgProgress, NgProgressModule} from 'ngx-progressbar';
 
 interface IPackage {
   cols: number;
@@ -28,7 +29,7 @@ export class PackagesListComponent implements OnInit {
     'Salt',
     'Container'
   ];
-  constructor() {
+  constructor(public ngProgress: NgProgress) {
     this.packages = [
       {
         name: 'python',
@@ -94,7 +95,6 @@ export class PackagesListComponent implements OnInit {
         picked: false
       }
     ];
-
   }
 
   onPick(pack: IPackage) {
@@ -107,6 +107,9 @@ export class PackagesListComponent implements OnInit {
   }
 
   onGenerateClick() {
+    this.ngProgress.set(0);
+    this.ngProgress.inc(1);
+    this.ngProgress.start();
     const pickedPackges: IPackage[] = [];
     for (let i = 0; i < this.packages.length; i++) {
       if (this.packages[i].picked) {
@@ -129,7 +132,5 @@ export class PackagesListComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
-
 }
