@@ -4,12 +4,14 @@ import { AppComponent } from './app.component';
 import { PackagesListComponent } from './packages-list/packages-list.component';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule, MatIconModule, MatRadioModule } from '@angular/material';
+import { GeneratorComponent } from './generator/generator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PackagesListComponent
+    PackagesListComponent,
+    GeneratorComponent
   ],
   imports: [
     BrowserModule,
