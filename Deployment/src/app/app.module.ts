@@ -7,6 +7,9 @@ import { MatGridListModule, MatIconModule, MatRadioModule } from '@angular/mater
 import {MatButtonModule} from '@angular/material/button';
 import { NgProgressModule } from 'ngx-progressbar';
 import { GeneratorComponent } from './generator/generator.component';
+import { DeployFileGeneratorService } from './generator/deploy-file-generator.service';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,8 +26,11 @@ import { GeneratorComponent } from './generator/generator.component';
     MatRadioModule,
     MatButtonModule,
     NgProgressModule
+    HttpClientModule,
+    HttpModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [DeployFileGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
