@@ -47,6 +47,51 @@ export class PackagesListComponent implements OnInit {
         id: '',
         version: '3.6',
         picked: false
+      },
+      {
+        name: 'jenkins',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/jenkins.png',
+        id: '',
+        version: '2.7',
+        picked: false
+      },
+      {
+        name: 'gitlab',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/gitlab.png',
+        id: '',
+        version: '3.6',
+        picked: false
+      },
+      {
+        name: 'java',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/java.png',
+        id: '',
+        version: '2.7',
+        picked: false
+      },
+      {
+        name: 'node',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/node.png',
+        id: '',
+        version: '3.6',
+        picked: false
+      },
+      {
+        name: 'notepad++',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/notepad.png',
+        id: '',
+        version: '3.6',
+        picked: false
       }
     ];
 
