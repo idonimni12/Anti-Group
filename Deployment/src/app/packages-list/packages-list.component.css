@@ -1,0 +1,33 @@
+img {
+    height: 100px;
+    width: 100px;
+}
+
+.picked {
+    border: 4px solid green !important;
+}
+
+.normal {
+    border: none !important;
+}
+
+button {
+    margin: 2%;
+}
+
+input {
+    margin: 2%;
+}
+
+.example-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+
+.example-selected-value {
+    margin: 15px 0;
+}
