@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PackagesListComponent } from './packages-list/packages-list.component';
+import { GeneratorComponent } from './generator/generator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PackagesListComponent
+    PackagesListComponent,
+    GeneratorComponent
   ],
   imports: [
     BrowserModule
