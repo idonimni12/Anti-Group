@@ -21,15 +21,22 @@
         {{opt}}
       </mat-radio-button>
     </mat-radio-group><br>
+    <div class="inputs">
+      <input type="text" name="build"><br>
+      <input type="text" name="run"><br>
+      <input type="text" name="port"><br>
+    </div>
     <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".zip">
     <button mat-raised-button color="blue" (click)="onGenerateClick()">Generate</button>
   </div><br>
-  <ng-progress
-    [positionUsing]="'marginLeft'"
-    [direction]="'leftToRightIncreased'"
-    [color]="'#4286f4'"
-    [trickleSpeed]="500"
-    [thick]="true"
-    [ease]="'easeInSine'"
-  ></ng-progress>
+  <div>
+    <ng-progress
+      [positionUsing]="'marginLeft'"
+      [direction]="'leftToRightIncreased'"
+      [color]="'#4286f4'"
+      [trickleSpeed]="500"
+      [thick]="true"
+      [ease]="'easeInSine'"
+    ></ng-progress>
+  </div>
 </div>

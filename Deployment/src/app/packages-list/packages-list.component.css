@@ -44,22 +44,21 @@ input {
 
 .icons {
   width: 100%;
+  height: 25vh;
   text-align: center;
 }
 
 .actions_left {
   float: left;
   width: 60%;
-  height: 30px;
   display: inline;
 }
 
 .actions_right {
   float: right;
-  height: 30px;
+  height: 100%;
   text-align: left;
-  padding-top: 6%;
-  display: inline;
+  padding-top: 3.5%;
 }
 
 .actions_right button {
