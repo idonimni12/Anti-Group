@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatRadioModule,
     MatButtonModule,
-    NgProgressModule
+    NgProgressModule,
     HttpClientModule,
     HttpModule,
     MatRadioModule
