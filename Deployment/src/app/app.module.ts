@@ -5,6 +5,7 @@ import { PackagesListComponent } from './packages-list/packages-list.component';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule, MatIconModule, MatRadioModule } from '@angular/material';
 import { GeneratorComponent } from './generator/generator.component';
+import { DeployFileGeneratorService } from './generator/deploy-file-generator.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { GeneratorComponent } from './generator/generator.component';
     FormsModule,
     MatRadioModule
   ],
-  providers: [],
+  providers: [DeployFileGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

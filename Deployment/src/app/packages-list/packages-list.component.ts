@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DeployFileGeneratorService } from '../generator/deploy-file-generator.service';
 
-interface IPackage {
+export interface IPackage {
   cols: number;
   rows: number;
   img: string;
@@ -10,7 +11,7 @@ interface IPackage {
   picked: boolean;
 }
 
-interface IPackageList {
+export interface IPackageList {
   packages: IPackage[];
   type: string;
 }
@@ -25,10 +26,10 @@ export class PackagesListComponent implements OnInit {
   packages: IPackage[];
   deployTo: string;
   options = [
-    'Salt',
-    'Container'
+    'salt',
+    'docker'
   ];
-  constructor() {
+  constructor(private deployService: DeployFileGeneratorService) {
     this.packages = [
       {
         name: 'python',
@@ -40,7 +41,7 @@ export class PackagesListComponent implements OnInit {
         picked: false
       },
       {
-        name: 'mongoDB',
+        name: 'mongo',
         cols: 1,
         rows: 1,
         img: '../../assets/mongodb.png',
@@ -58,7 +59,7 @@ export class PackagesListComponent implements OnInit {
         picked: false
       },
       {
-        name: 'gitlab',
+        name: 'gitlab/gitlab-ce',
         cols: 1,
         rows: 1,
         img: '../../assets/gitlab.png',
@@ -115,7 +116,7 @@ export class PackagesListComponent implements OnInit {
     }
     const packageList: IPackageList = {packages: pickedPackges, type: this.deployTo};
     console.log(packageList);
-    // generatorRouting(packageList)
+    this.deployService.generatorRouting(packageList);
   }
 
 

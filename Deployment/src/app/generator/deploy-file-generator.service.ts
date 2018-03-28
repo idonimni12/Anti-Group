@@ -1,17 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IPackage, IPackageList } from '../packages-list/packages-list.component';
 
-@Component({
-  selector: 'app-generator',
-  templateUrl: './generator.component.html',
-  styleUrls: ['./generator.component.css']
-})
-export class GeneratorComponent implements OnInit {
-  private masterServer = '130.61.93.213';
+@Injectable()
+export class DeployFileGeneratorService {
 
-  constructor() {
-
-  }
+  constructor() { }
 
   generatorRouting(packageList: IPackageList) {
     if (packageList.type === 'docker') {
@@ -25,7 +18,7 @@ export class GeneratorComponent implements OnInit {
     }
   }
 
-  readFile(file) {
+  private readFile(file) {
     const raw = new XMLHttpRequest(); // create a request
     raw.open('GET', file, false); // open file
     raw.onreadystatechange = function () { // file is ready to read
@@ -39,19 +32,16 @@ export class GeneratorComponent implements OnInit {
     raw.send(null); // return control
   }
 
-  generateSaltFile(packageList: IPackage[]) {
+  private generateSaltFile(packageList: IPackage[]) {
     let saltFileTemplate = this.readFile('../files/install_package.txt');
   }
 
-  generateDockerFile(packageList: IPackage[]) {
+  private generateDockerFile(packageList: IPackage[]) {
     let dockerfile = '';
     for (let i = 0; i < packageList.length; i++) {
-      dockerfile += 'FROM ' + packageList[i].name + ':@latest\n';
+      dockerfile += 'FROM ' + packageList[i].name + ':latest\n';
     }
     console.log(dockerfile);
   }
 
-  ngOnInit() {
-
-  }
 }
