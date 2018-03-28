@@ -36,9 +36,6 @@ export class DeployFileGeneratorService {
     let dockerfile = '';
     for (let i = 0; i < packageList.length; i++) {
       dockerfile += 'FROM ' + packageList[i].name + ':latest\n';
-      if (packageList[i].require) {
-        dockerfile += 'FROM ' + packageList[i].require + ':latest\n';
-      }
     }
     if (buildScript !== '') {
       dockerfile += 'RUN ' + buildScript + '\n';
