@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { MatGridListModule, MatIconModule, MatRadioModule } from '@angular/material';
 import { GeneratorComponent } from './generator/generator.component';
 import { DeployFileGeneratorService } from './generator/deploy-file-generator.service';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { DeployFileGeneratorService } from './generator/deploy-file-generator.se
     MatGridListModule,
     MatIconModule,
     FormsModule,
+    HttpClientModule,
+    HttpModule,
     MatRadioModule
   ],
   providers: [DeployFileGeneratorService],

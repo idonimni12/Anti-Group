@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { IPackage, IPackageList } from '../packages-list/packages-list.component';
 
 @Injectable()
 export class DeployFileGeneratorService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   generatorRouting(packageList: IPackageList) {
     if (packageList.type === 'docker') {
       console.log('Generating Docker file...');
-      this.generateDockerFile(packageList.packages);
+      this.generateDockerFile(packageList.packages, packageList.buildScript,
+                              packageList.runTimeScript, packageList.port);
     } else if (packageList.type === 'salt') {
       console.log('Generating Salt file...');
       this.generateSaltFile(packageList.packages);
@@ -18,30 +20,38 @@ export class DeployFileGeneratorService {
     }
   }
 
-  private readFile(file) {
-    const raw = new XMLHttpRequest(); // create a request
-    raw.open('GET', file, false); // open file
-    raw.onreadystatechange = function () { // file is ready to read
-      if (raw.readyState === 4) {
-        if (raw.status === 200 || raw.status === 0) {
-          const allText = raw.responseText;
-          alert(allText); // can be also console.logged, of course.
-        }
-      }
-    };
-    raw.send(null); // return control
-  }
-
   private generateSaltFile(packageList: IPackage[]) {
-    let saltFileTemplate = this.readFile('../files/install_package.txt');
+    let statefile = 'include:\n';
+    for (let i = 0; i < packageList.length; i++) {
+      statefile += '  - ' + packageList[i].state + '\n';
+      if (packageList[i].require) {
+        statefile += '  - ' + packageList[i].require + '\n';
+      }
+    }
+    console.log(statefile);
   }
 
-  private generateDockerFile(packageList: IPackage[]) {
+  private generateDockerFile(packageList: IPackage[], buildScript: string,
+                             runTimeScript: string, port: string) {
     let dockerfile = '';
     for (let i = 0; i < packageList.length; i++) {
       dockerfile += 'FROM ' + packageList[i].name + ':latest\n';
+      if (packageList[i].require) {
+        dockerfile += 'FROM ' + packageList[i].require + ':latest\n';
+      }
     }
+    if (buildScript !== '') {
+      dockerfile += 'RUN ' + buildScript + '\n';
+    }
+    if (runTimeScript !== '') {
+      dockerfile += 'CMD ' + runTimeScript + '\n';
+    }
+    if (port !== '') {
+      dockerfile += 'EXPOSE ' + port + '\n';
+    }
+
     console.log(dockerfile);
+
   }
 
 }

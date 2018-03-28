@@ -5,15 +5,19 @@ export interface IPackage {
   cols: number;
   rows: number;
   img: string;
-  id: string;
+  state: string;
   name: string;
   version: string;
   picked: boolean;
+  require: string;
 }
 
 export interface IPackageList {
   packages: IPackage[];
   type: string;
+  buildScript: string;
+  runTimeScript: string;
+  port: string;
 }
 
 @Component({
@@ -25,74 +29,107 @@ export class PackagesListComponent implements OnInit {
 
   packages: IPackage[];
   deployTo: string;
+  build: string;
+  run: string;
+  port: string;
   options = [
     'salt',
     'docker'
   ];
   constructor(private deployService: DeployFileGeneratorService) {
+    this.build = '';
+    this.run = '';
+    this.port = '';
     this.packages = [
       {
         name: 'python',
         cols: 1,
         rows: 1,
         img: '../../assets/python.png',
-        id: '',
+        state: 'python-package',
         version: '2.7',
-        picked: false
+        picked: false,
+        require: null
       },
       {
         name: 'mongo',
         cols: 1,
         rows: 1,
         img: '../../assets/mongodb.png',
-        id: '',
+        state: 'mongo-package',
         version: '3.6',
-        picked: false
+        picked: false,
+        require: null
       },
       {
         name: 'jenkins',
         cols: 1,
         rows: 1,
         img: '../../assets/jenkins.png',
-        id: '',
+        state: 'jenkins-package',
         version: '2.7',
-        picked: false
+        picked: false,
+        require: 'java-package'
       },
       {
         name: 'gitlab/gitlab-ce',
         cols: 1,
         rows: 1,
         img: '../../assets/gitlab.png',
-        id: '',
+        state: 'gitlab-package',
         version: '3.6',
-        picked: false
+        picked: false,
+        require: null
       },
       {
         name: 'java',
         cols: 1,
         rows: 1,
         img: '../../assets/java.png',
-        id: '',
+        state: 'java-package',
         version: '2.7',
-        picked: false
+        picked: false,
+        require: null
       },
       {
         name: 'node',
         cols: 1,
         rows: 1,
         img: '../../assets/node.png',
-        id: '',
+        state: 'node-package',
         version: '3.6',
-        picked: false
+        picked: false,
+        require: null
+      },
+      {
+        name: 'nginx',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/nginx.png',
+        state: 'nginx-package',
+        version: '3.6',
+        picked: false,
+        require: null
+      },
+      {
+        name: 'sonar',
+        cols: 1,
+        rows: 1,
+        img: '../../assets/sonar.png',
+        state: 'sonar-package',
+        version: '3.6',
+        picked: false,
+        require: 'java-package'
       },
       {
         name: 'notepad++',
         cols: 1,
         rows: 1,
         img: '../../assets/notepad.png',
-        id: '',
+        state: 'notepadd-package',
         version: '3.6',
-        picked: false
+        picked: false,
+        require: null
       }
     ];
 
@@ -114,7 +151,9 @@ export class PackagesListComponent implements OnInit {
         pickedPackges.push(this.packages[i]);
       }
     }
-    const packageList: IPackageList = {packages: pickedPackges, type: this.deployTo};
+    const packageList: IPackageList = {packages: pickedPackges, type: this.deployTo,
+                                       buildScript: this.build, runTimeScript: this.run,
+                                       port: this.port};
     console.log(packageList);
     this.deployService.generatorRouting(packageList);
   }
