@@ -18,6 +18,7 @@ export interface IPackageList {
   buildScript: string;
   runTimeScript: string;
   port: string;
+  artifacts: string;
 }
 
 @Component({
@@ -32,6 +33,7 @@ export class PackagesListComponent implements OnInit {
   build: string;
   run: string;
   port: string;
+  artifacts: string;
   options = [
     'salt',
     'docker'
@@ -40,6 +42,7 @@ export class PackagesListComponent implements OnInit {
     this.build = '';
     this.run = '';
     this.port = '';
+    this.artifacts = '';
     this.packages = [
       {
         name: 'python',
@@ -112,16 +115,6 @@ export class PackagesListComponent implements OnInit {
         require: null
       },
       {
-        name: 'sonar',
-        cols: 1,
-        rows: 1,
-        img: '../../assets/sonar.png',
-        state: 'sonar-package',
-        version: '3.6',
-        picked: false,
-        require: 'java-package'
-      },
-      {
         name: 'notepad++',
         cols: 1,
         rows: 1,
@@ -156,19 +149,9 @@ export class PackagesListComponent implements OnInit {
     }
     const packageList: IPackageList = {packages: pickedPackges, type: this.deployTo,
                                        buildScript: this.build, runTimeScript: this.run,
-                                       port: this.port};
+                                       port: this.port, artifacts: this.artifacts};
     console.log(packageList);
     this.deployService.generatorRouting(packageList);
-  }
-
-
-  fileChange(event) {
-    const fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-        const file: File = fileList[0];
-        const formData: FormData = new FormData();
-        formData.append('uploadFile', file, file.name);
-    }
   }
 
   ngOnInit() {
