@@ -29,14 +29,5 @@
     <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".zip">
     <button mat-raised-button color="blue" (click)="onGenerateClick()">Generate</button>
   </div><br>
-  <div>
-    <ng-progress
-      [positionUsing]="'marginLeft'"
-      [direction]="'leftToRightIncreased'"
-      [color]="'#4286f4'"
-      [trickleSpeed]="500"
-      [thick]="true"
-      [ease]="'easeInSine'"
-    ></ng-progress>
-  </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 </div>

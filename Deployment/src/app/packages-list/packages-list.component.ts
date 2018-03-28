@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DeployFileGeneratorService } from '../generator/deploy-file-generator.service';
-import {NgProgress, NgProgressModule} from 'ngx-progressbar';
 
 export interface IPackage {
   cols: number;
@@ -27,7 +26,7 @@ export interface IPackageList {
   styleUrls: ['./packages-list.component.css']
 })
 export class PackagesListComponent implements OnInit {
-
+  loading = false;
   packages: IPackage[];
   deployTo: string;
   build: string;
@@ -37,7 +36,7 @@ export class PackagesListComponent implements OnInit {
     'salt',
     'docker'
   ];
-  constructor(private ngProgress: NgProgress, private deployService: DeployFileGeneratorService) {
+  constructor(private deployService: DeployFileGeneratorService) {
     this.build = '';
     this.run = '';
     this.port = '';
@@ -145,9 +144,10 @@ export class PackagesListComponent implements OnInit {
   }
 
   onGenerateClick() {
-    this.ngProgress.set(0);
-    this.ngProgress.inc(1);
-    this.ngProgress.start();
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
     const pickedPackges: IPackage[] = [];
     for (let i = 0; i < this.packages.length; i++) {
       if (this.packages[i].picked) {

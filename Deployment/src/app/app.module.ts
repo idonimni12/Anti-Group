@@ -5,7 +5,7 @@ import { PackagesListComponent } from './packages-list/packages-list.component';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule, MatIconModule, MatRadioModule } from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
-import { NgProgressModule } from 'ngx-progressbar';
+import {ANIMATION_TYPES, LoadingModule} from 'ngx-loading';
 import { GeneratorComponent } from './generator/generator.component';
 import { DeployFileGeneratorService } from './generator/deploy-file-generator.service';
 import { HttpModule } from '@angular/http';
@@ -25,7 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatRadioModule,
     MatButtonModule,
-    NgProgressModule,
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBorderRadius: '4px',
+    }),
     HttpClientModule,
     HttpModule,
     MatRadioModule
