@@ -1,0 +1,12 @@
+<div class="textarea" *ngIf="visable">
+  <p> The {{type}} File - you can edit if you want after click deploy ... </p>
+  <br>
+  <mat-form-field id="edit-section">
+    <textarea matInput matTextareaAutosize matAutosizeMinRows="20"
+              matAutosizeMaxRows="20" matAutosizeMinCols="50" [value]="value"></textarea>
+  </mat-form-field>
+  <br>
+  <button scrollTo scrollYTarget="0" mat-raised-button color="blue" (click)="onDeploy()">Deploy</button>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+

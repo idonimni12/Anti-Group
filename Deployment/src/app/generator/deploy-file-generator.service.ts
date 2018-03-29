@@ -10,11 +10,11 @@ export class DeployFileGeneratorService {
   generatorRouting(packageList: IPackageList) {
     if (packageList.type === 'docker') {
       console.log('Generating Docker file...');
-      this.generateDockerFile(packageList.packages, packageList.buildScript,
+      return this.generateDockerFile(packageList.packages, packageList.buildScript,
                               packageList.runTimeScript, packageList.port, packageList.artifacts);
     } else if (packageList.type === 'salt') {
       console.log('Generating Salt file...');
-      this.generateSaltFile(packageList.packages, packageList.artifacts);
+      return this.generateSaltFile(packageList.packages, packageList.artifacts);
     } else {
       console.log('Type not supported');
     }
@@ -29,6 +29,7 @@ export class DeployFileGeneratorService {
       }
     }
     console.log(statefile);
+    return statefile;
   }
 
   private generateDockerFile(packageList: IPackage[], buildScript: string,
@@ -36,6 +37,10 @@ export class DeployFileGeneratorService {
     let dockerfile = '';
     for (let i = 0; i < packageList.length; i++) {
       dockerfile += 'FROM ' + packageList[i].name + ':latest\n';
+    }
+    if (artifact !== '') {
+      dockerfile += 'RUN wget ' + artifact + '\n';
+      dockerfile += 'RUN unzip ' + artifact.substring(artifact.lastIndexOf('/') + 1);
     }
     if (buildScript !== '') {
       dockerfile += 'RUN ' + buildScript + '\n';
@@ -48,7 +53,7 @@ export class DeployFileGeneratorService {
     }
 
     console.log(dockerfile);
-
+    return dockerfile;
   }
 
 }

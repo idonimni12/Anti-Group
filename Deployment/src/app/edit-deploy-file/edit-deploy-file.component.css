@@ -1,0 +1,24 @@
+body {
+    bottom: 0;
+    float: left;
+}
+
+.textarea {
+    float: left;
+    width: 60%;
+    height: 100%;
+    margin-top: 20%;
+    margin-left: 20%;
+    display: inline;
+}
+
+mat-form-field {
+    padding: 10px;
+    width: 60% !important;
+    border: 5px solid blue !important;
+}
+
+button {
+    margin: 2.5%;
+    margin-left: 50%;
+}

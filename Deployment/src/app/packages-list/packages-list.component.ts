@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DeployFileGeneratorService } from '../generator/deploy-file-generator.service';
 
 export interface IPackage {
@@ -27,13 +27,15 @@ export interface IPackageList {
   styleUrls: ['./packages-list.component.css']
 })
 export class PackagesListComponent implements OnInit {
-  loading = false;
+  @Output() genereted = new EventEmitter<string>();
   packages: IPackage[];
   deployTo: string;
   build: string;
   run: string;
   port: string;
   artifacts: string;
+  visability: boolean;
+  value: string;
   options = [
     'salt',
     'docker'
@@ -137,10 +139,6 @@ export class PackagesListComponent implements OnInit {
   }
 
   onGenerateClick() {
-    this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
     const pickedPackges: IPackage[] = [];
     for (let i = 0; i < this.packages.length; i++) {
       if (this.packages[i].picked) {
@@ -151,7 +149,10 @@ export class PackagesListComponent implements OnInit {
                                        buildScript: this.build, runTimeScript: this.run,
                                        port: this.port, artifacts: this.artifacts};
     console.log(packageList);
-    this.deployService.generatorRouting(packageList);
+    const script = this.deployService.generatorRouting(packageList);
+    this.genereted.emit(script);
+    this.value = script;
+    this.visability = true;
   }
 
   ngOnInit() {
