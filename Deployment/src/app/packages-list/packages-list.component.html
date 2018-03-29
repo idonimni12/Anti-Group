@@ -4,7 +4,7 @@
 
 <div class="icons">
   <div class="actions_left">
-    <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-list cols="4" rowHeight="150px">
       <mat-grid-tile
           *ngFor="let tile of packages"
           [colspan]="tile.cols"
@@ -27,7 +27,11 @@
       <input type="text" name="port" placeholder="enter port to expose ..." [(ngModel)]="port"><br>
       <input type="text" placeholder="url to artifacts ..." name="artifacts" [(ngModel)]="artifacts"><br>
     </div>
-    <button mat-raised-button color="blue" (click)="onGenerateClick()">Generate</button>
+    <button scrollTo scrollYTarget="800" mat-raised-button color="blue" (click)="onGenerateClick()">
+      Generate
+    </button>
   </div><br>
-  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  
 </div>
+
+<app-edit-deploy-file [visable]="visability" [value]="value" [type]="deployTo"></app-edit-deploy-file>

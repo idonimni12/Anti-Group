@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  visibility: boolean;
+  value: string;
+
+  constructor() {}
+
+  onGenerate(val: string) {
+    this.visibility = true;
+    this.value = val;
+  }
 }
