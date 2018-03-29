@@ -45,6 +45,7 @@ export class PackagesListComponent implements OnInit {
     this.run = '';
     this.port = '';
     this.artifacts = '';
+    this.deployTo = 'docker';
     this.packages = [
       {
         name: 'python',
