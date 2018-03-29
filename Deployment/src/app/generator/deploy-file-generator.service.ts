@@ -30,8 +30,11 @@ export class DeployFileGeneratorService {
         statefile += '  - ' + packageList[i].require + '\n';
       }
     }
-    statefile += "artifact:\n  cmd.run:\n    - name: wget " + artifact +'\n';
-    statefile += 'unzip:\n  cmd.run:\n    - name: unzip ' + artifact.substring(artifact.lastIndexOf('/') + 1);
+
+    if (artifact != '') {
+      statefile += "artifact:\n  cmd.run:\n    - name: wget " + artifact + '\n';
+      statefile += 'unzip:\n  cmd.run:\n    - name: unzip ' + artifact.substring(artifact.lastIndexOf('/') + 1);
+    }
     console.log(statefile);
     return statefile;
   }
