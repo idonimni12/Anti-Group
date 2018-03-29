@@ -14,13 +14,15 @@ export class DeployFileGeneratorService {
                               packageList.runTimeScript, packageList.port, packageList.artifacts);
     } else if (packageList.type === 'salt') {
       console.log('Generating Salt file...');
-      this.generateSaltFile(packageList.packages, packageList.artifacts);
+      this.generateSaltFile(packageList.packages, packageList.buildScript,
+                            packageList.runTimeScript, packageList.port, packageList.artifacts);
     } else {
       console.log('Type not supported');
     }
   }
 
-  private generateSaltFile(packageList: IPackage[], artifact: string) {
+  private generateSaltFile(packageList: IPackage[], buildScript: string,
+                           runTimeScript: string, port: string, artifact: string) {
     let statefile = 'include:\n';
     for (let i = 0; i < packageList.length; i++) {
       statefile += '  - ' + packageList[i].state + '\n';
@@ -28,6 +30,8 @@ export class DeployFileGeneratorService {
         statefile += '  - ' + packageList[i].require + '\n';
       }
     }
+    statefile += "artifact:\n  cmd.run:\n    - name: wget " + artifact +'\n';
+    statefile += 'unzip:\n  cmd.run:\n    - name: unzip ' + artifact.substring(artifact.lastIndexOf('/') + 1);
     console.log(statefile);
   }
 

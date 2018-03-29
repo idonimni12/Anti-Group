@@ -59,14 +59,11 @@ input {
   height: 100%;
   text-align: left;
   padding-top: 3.5%;
-  margin-right: 7%;
+  padding-right: 10%;
 }
 
 .actions_right button {
-  width: 50%;
-}
-
-mat-grid-list {
+  width: 100%;
 }
 
 mat-grid-tile {
